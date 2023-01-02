@@ -88,6 +88,10 @@ const handleSubmit = async (e) => {
 
   loader(messageDiv);
 
+  //fetch data from server
+
+  const response = await fetch
+
 
 }
 // Submit user response with enter
