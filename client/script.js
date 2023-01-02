@@ -63,4 +63,38 @@ function chatStripe(isAi, value, uniqueId) {
   )
 }
 
-const handleSubmit = asymc(e);
+//AI generated response
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  // user's chat section
+
+  chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
+
+  form.reset();
+
+  //AI's chat section
+
+  const uniqueId = generateUniqueID();
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
+
+
+// Put message in view
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+
+  const messageDiv = document.getElementById(uniqueId);
+
+  loader(messageDiv);
+
+
+}
+// Submit user response with enter
+form.addEventListener('submit', handleSubmit);
+form.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    handleSubmit(e);
+  }
+  
+})
